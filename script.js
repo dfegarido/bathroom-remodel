@@ -204,7 +204,16 @@ function selectOption(name, value) {
 function updateProgress() {
     // Progress starts at 0% on step 1 (nothing filled yet)
     // Progress increases as user completes steps
-    const progress = currentStep === 1 ? 0 : ((currentStep - 1) / totalSteps) * 100;
+    // When on the last step, show 100%
+    let progress;
+    if (currentStep === 1) {
+        progress = 0;
+    } else if (currentStep === totalSteps) {
+        progress = 100;
+    } else {
+        progress = ((currentStep - 1) / totalSteps) * 100;
+    }
+    
     const progressFill = document.getElementById('progressFill');
     const progressPercent = document.getElementById('progressPercent');
     
